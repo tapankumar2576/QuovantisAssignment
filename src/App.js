@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Switch } from "react-router-dom";
+import { Routes, routeTypes } from "./Routes/Routes";
+import PublicRoute from "./Routes/Public/PublicRoute";
+import PrivateRoute from "./Routes/Private/PrivateRoute";
+import { connect } from "react-redux";
 
-function App() {
+const App = ({ isAuthorized }) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        {Routes.map((route, key) => {
+          const { type, component, path } = route;
+          return type === routeTypes.PUBLIC ? (
+            <PublicRoute
+              key={key}
+              exact
+              component={component}
+              isAuthorized={isAuthorized}
+              path={path}
+            />
+          ) : (
+            <PrivateRoute
+              key={key}
+              exact
+              component={component}
+              isAuthorized={isAuthorized}
+              path={path}
+            />
+          );
+        })}
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    isAuthorized: state.userReducer.isAuthorized
+  };
+};
+
+export default connect(mapStateToProps)(App);
