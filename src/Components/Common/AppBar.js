@@ -5,7 +5,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import ExitToApp from "@material-ui/icons/ExitToApp";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { handleLogout } from "../../../src/redux/user/userAction";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MenuAppBar = ({ auth }) => {
+const MenuAppBar = ({ auth, handleLogout }) => {
   const classes = useStyles();
 
   return (
@@ -30,13 +34,11 @@ const MenuAppBar = ({ auth }) => {
           </Typography>
           {auth && (
             <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                color="inherit"
-              >
+              <IconButton aria-label="account of current user" color="inherit">
                 <AccountCircle />
+              </IconButton>
+              <IconButton aria-label="account of current user" color="inherit">
+                <ExitToApp onClick={handleLogout} />
               </IconButton>
             </div>
           )}
@@ -45,4 +47,9 @@ const MenuAppBar = ({ auth }) => {
     </div>
   );
 };
-export default MenuAppBar;
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ handleLogout }, dispatch);
+};
+
+export default connect(null, mapDispatchToProps)(MenuAppBar);

@@ -4,9 +4,11 @@ import {
   GET_SELECTED_USER,
   DATA_FETCH_STARTED,
   DATA_FETCH_COMPLETED,
-  DATA_FETCH_FAILED
+  DATA_FETCH_FAILED,
+  LOGOUT_USER
 } from "../actionTypes/actionTypes";
 import { globalAPIHandler } from "../../services/services";
+import { persistor } from "../store";
 
 export const setCurrentUser = (email, password, rememberMe) => {
   let path = "api/login";
@@ -56,5 +58,14 @@ export const getSelectedUser = id => {
         const errorMessage = error.response.data.error;
         dispatch({ type: DATA_FETCH_FAILED, payload: errorMessage });
       });
+  };
+};
+
+export const handleLogout = () => {
+  return dispatch => {
+    persistor.purge(() => {
+      dispatch({ type: LOGOUT_USER });
+    });
+    window.location.pathname = "/";
   };
 };

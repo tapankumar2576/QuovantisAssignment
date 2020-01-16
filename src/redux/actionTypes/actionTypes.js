@@ -6,6 +6,8 @@ export const DATA_FETCH_FAILED = "DATA_FETCH_FAILED";
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
+export const LOGOUT_USER = "LOGOUT_USER";
+
 export const GET_USER_LIST = "GET_USER_LIST";
 
 export const GET_SELECTED_USER = "GET_SELECTED_USER";
