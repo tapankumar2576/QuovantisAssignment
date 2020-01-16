@@ -6,7 +6,8 @@ import loadReducer from "../redux/loader/loadReducer";
 
 const persistConfig = {
   key: "root",
-  storage
+  storage,
+  blacklist: ["loadReducer"]
 };
 
 const rootReducer = combineReducers({
