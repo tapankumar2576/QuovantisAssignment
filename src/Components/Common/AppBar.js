@@ -37,8 +37,13 @@ const MenuAppBar = ({ auth, handleLogout }) => {
               <IconButton aria-label="account of current user" color="inherit">
                 <AccountCircle />
               </IconButton>
-              <IconButton aria-label="account of current user" color="inherit">
-                <ExitToApp onClick={handleLogout} />
+              <IconButton
+                aria-label="logout"
+                title="logout"
+                color="inherit"
+                onClick={handleLogout}
+              >
+                <ExitToApp />
               </IconButton>
             </div>
           )}
