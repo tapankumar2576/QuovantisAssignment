@@ -11,13 +11,13 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { handleLogout } from "../../../src/redux/user/userAction";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   title: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
 const MenuAppBar = ({ auth, handleLogout }) => {
@@ -29,7 +29,7 @@ const MenuAppBar = ({ auth, handleLogout }) => {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Link style={{ textDecoration: "none", color: "white" }} to="/">
-              Quovantis Assignment
+              Users Demo
             </Link>
           </Typography>
           {auth && (
@@ -53,7 +53,7 @@ const MenuAppBar = ({ auth, handleLogout }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ handleLogout }, dispatch);
 };
 
